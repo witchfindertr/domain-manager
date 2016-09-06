@@ -112,7 +112,7 @@
                 <td><?php echo date('d/m/Y',$db_rows->domain_creation);?></td>
                 <td><?php echo $db_rows->domain_company;?></td>
                 <td class='action'>
-                  <a class='btn btn-info' href='#'>
+                  <a class='btn btn-info' href='<?php echo $_link.'view.php?id='.$db_rows->domain_id;?>'>
                     <i class='icon-edit'></i>
                   </a>
                   <a class='btn btn-danger' href='#'>

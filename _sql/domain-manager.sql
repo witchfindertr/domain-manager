@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Anamakine: localhost
--- Üretim Zamanı: 06 Eyl 2016, 14:33:54
+-- Üretim Zamanı: 06 Eyl 2016, 18:36:29
 -- Sunucu sürümü: 10.1.16-MariaDB
 -- PHP Sürümü: 5.5.38
 
@@ -32,6 +32,12 @@ CREATE TABLE `domain_list` (
   `domain_ext` varchar(10) COLLATE utf8_turkish_ci NOT NULL,
   `domain_company` varchar(100) COLLATE utf8_turkish_ci NOT NULL,
   `domain_creation` int(11) NOT NULL,
+  `domain_ns1` varchar(225) COLLATE utf8_turkish_ci NOT NULL,
+  `domain_ns2` varchar(225) COLLATE utf8_turkish_ci NOT NULL,
+  `domain_ns3` varchar(225) COLLATE utf8_turkish_ci NOT NULL,
+  `domain_ip1` varchar(20) COLLATE utf8_turkish_ci NOT NULL,
+  `domain_ip2` varchar(20) COLLATE utf8_turkish_ci NOT NULL,
+  `domain_ip3` varchar(20) COLLATE utf8_turkish_ci NOT NULL,
   `domain_status` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 
@@ -39,9 +45,9 @@ CREATE TABLE `domain_list` (
 -- Tablo döküm verisi `domain_list`
 --
 
-INSERT INTO `domain_list` (`domain_id`, `domain_link`, `domain_ext`, `domain_company`, `domain_creation`, `domain_status`) VALUES
-(9, 'abdullahcetinkaya', '.com', 'Name.com', 947458801, 1),
-(10, 'ucankedi', '.com', 'Godaddy.com', 621468001, 1);
+INSERT INTO `domain_list` (`domain_id`, `domain_link`, `domain_ext`, `domain_company`, `domain_creation`, `domain_ns1`, `domain_ns2`, `domain_ns3`, `domain_ip1`, `domain_ip2`, `domain_ip3`, `domain_status`) VALUES
+(23, 'haber7', '.com', 'Name.com', 1267311601, 'DNS1.HOSTTOWEB.NET', 'DNS2.HOSTTOWEB.NET', '', '46.245.160.1', '46.245.161.1', '', 1),
+(24, 'haberler', '.com', 'Godaddy.com', 1422399601, 'AMS.NETDIREKT.COM.TR', 'FRK.NETDIREKT.COM.TR', 'IST.NETDIREKT.COM.TR', '178.79.159.169', '77.223.145.254', '77.223.146.235', 1);
 
 --
 -- Dökümü yapılmış tablolar için indeksler
@@ -61,7 +67,7 @@ ALTER TABLE `domain_list`
 -- Tablo için AUTO_INCREMENT değeri `domain_list`
 --
 ALTER TABLE `domain_list`
-  MODIFY `domain_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `domain_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
