@@ -40,7 +40,6 @@ CREATE TABLE `domain_list` (
 --
 
 INSERT INTO `domain_list` (`domain_id`, `domain_link`, `domain_ext`, `domain_company`, `domain_creation`, `domain_status`) VALUES
-(8, 'ismailaga', '.com', 'Name.com', 1362006001, 1),
 (9, 'abdullahcetinkaya', '.com', 'Name.com', 947458801, 1),
 (10, 'ucankedi', '.com', 'Godaddy.com', 621468001, 1);
 
