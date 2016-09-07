@@ -120,7 +120,7 @@
                   <a class='btn btn-info' href='<?php echo $_link.'view.php?id='.$db_rows->domain_id;?>'>
                     <i class='icon-edit'></i>
                   </a>
-                  <a class='btn btn-info' href='<?php echo $_link.'api.php?id='.$db_rows->domain_id;?>' target="_bank">
+                  <a class='btn btn-info' href='<?php echo $_link.'api.php?id='.$db_rows->domain_id;?>'  target="_bank">
                     <i class='icon-search'></i>
                   </a>
                   <a class='btn btn-danger' href='<?php echo $_link.'delete.php?id='.$db_rows->domain_id;?>'>
