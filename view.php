@@ -76,7 +76,7 @@
       <!-- Tools -->
       <section id='tools'>
         <ul class='breadcrumb' id='breadcrumb'>
-          <li class='title'>Add Domain</li>
+          <li class='title'>Domain View Page</li>
         </ul>
         <div id='toolbar'>
           
@@ -87,32 +87,37 @@
         <div class='panel panel-default'>
           <div class='panel-heading'>
             <i class='icon-edit icon-large'></i>
-            Add Domain Form
+            Domain View 
           </div>
           <div class='panel-body'>
             
               <fieldset>
-                <div class='form-actions'>
-                  <a href="<?php echo $_link.'api.php?id='.$row->domain_id;?>"><button class='btn btn-default' type='button'>Update Information</button></a>
+                <div class='form-actions' style="float:right;">
+                  <a href="<?php echo $_link.'delete.php?id='.$row->domain_id;?>"><button class='btn btn-default' type='button'>Domain Delete</button></a>
                 </div>
+                <div class='form-actions'>
+                  <a href="<?php echo $_link.'api.php?id='.$row->domain_id;?>"><button class='btn btn-default' type='button'>Get Update Information</button></a> - <?php echo date('d/m/Y H:i:s',$row->domain_update_date);?>
+                </div>
+                
                 <div style="margin-top:15px;">
+                </div>
+                <div class='form-group'>
+                  <label class='control-label' style="color:Red;">Expiration Date</label>
+                  <input class='form-control' placeholder='' type='text' name='domain_update_time' value="<?php echo date('d/m/Y',$row->domain_expiration_date);?>">
+                </div>
+                <div class='form-group'>
+                  <label class='control-label'>Creation Date</label>
+                  <input class='form-control' placeholder='' type='text' name='domain_creation' value="<?php echo date('d/m/Y',$row->domain_creation_date);?>">
                 </div>
                 <div class='form-group'>
                   <label class='control-label'>Domain Name (e.g google)</label>
                   <input class='form-control' placeholder='google' type='text' name='domain_link' value="<?php echo $row->domain_link.$row->domain_ext;?>">
                 </div>
                 <div class='form-group'>
-                  <label class='control-label'>Domain Extension</label>
-                  <input class='form-control' placeholder='' type='text' name='domain_ext' value="<?php echo $row->domain_ext;?>">
-                </div>
-                <div class='form-group'>
                   <label class='control-label'>Registered Company</label>
                   <input class='form-control' placeholder='' type='text' name='domain_company' value="<?php echo $row->domain_company;?>">
                 </div>
-                <div class='form-group'>
-                  <label class='control-label'>Domain Creation Date (e.g 28.02.2000)</label>
-                  <input class='form-control' placeholder='28.02.2000' type='text' name='domain_creation' value="<?php echo date('d/m/Y',$row->domain_creation);?>">
-                </div>
+                
                 <?php if (isset ($row->domain_ns1) and !empty($row->domain_ns1) ){ ?>
                 <div class='form-group'>
                   <label class='control-label'>Domain Name Server 1</label>

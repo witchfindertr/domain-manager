@@ -3,48 +3,40 @@
 
 		if (isset($_POST['domain_link'])){
 						
-						$domain_link 		=	strip_tags($_POST['domain_link']);
-						$domain_ext 		=	strip_tags($_POST['domain_ext']);
+						$domain_link      =	strip_tags($_POST['domain_link']);
+						$domain_ext 		  =	strip_tags($_POST['domain_ext']);
 						$domain_company		=	strip_tags($_POST['domain_company']);
-						$domain_creation	=	strip_tags($_POST['domain_creation']);
 						$domain_status		=	'1'; //Aktif Domain
 						
 
 			/* Kontrol Boş Gönderimleri Engellemek */
 			if (
-					( $domain_link 		== '' ) or 
-					( $domain_ext	 	== '' ) or 
-					( $domain_company	== '' ) or
-					( $domain_creation 	== '' ) 
+					( $domain_link     == '' ) or 
+					( $domain_ext      == '' ) or 
+					( $domain_company  == '' )
 				){  
 					header("Location:forms.php?alert=1");
 					die; 
 				 }
 			/* Kontrol Boş Gönderimleri Engellemek */
 
-			// Unix Timestamp
-			$domain_creation	=	$domain_creation.' 00:00:01';
-			$domain_creation	=	strtotime($domain_creation);
-
 			/* Kayıtları DB Ekleme */
 			$register = $db->query("INSERT INTO domain_list (
-																domain_link,
-																domain_ext,
-																domain_company,
-																domain_creation,
-																domain_status
-															
-															) VALUES (
-															
-																'$domain_link',
-																'$domain_ext',
-																'$domain_company',
-																'$domain_creation',
-																'$domain_status'
+                        																domain_link,
+                        																domain_ext,
+                        																domain_company,
+                        																domain_status
+                        															
+                        															) VALUES (
+                        															
+                        																'$domain_link',
+                        																'$domain_ext',
+                        																'$domain_company',
+                        																'$domain_status'
 
-                                                            )");
+                                                                                    )");
 			if ($register){
-				header("Location:forms.php?alert=2");
+        header("Location:forms.php?alert=2");
 				die;
 			}
 			/* Kayıtları DB Ekleme */
@@ -150,10 +142,6 @@
                     <option value = 'Godaddy.com'>Godaddy.com</option>
                     <option value = 'Natro.com'>Natro.com</option>
                   </select>
-                </div>
-                <div class='form-group'>
-                  <label class='control-label'>Domain Creation Date (e.g 28.02.2000)</label>
-                  <input class='form-control' placeholder='28.02.2000' type='text' name='domain_creation'>
                 </div>
                 <div class='form-actions'>
                   <button class='btn btn-default' type='submit'>Submit</button>

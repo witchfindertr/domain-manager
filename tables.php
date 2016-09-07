@@ -90,43 +90,43 @@
               </div>
             </div>
           </div>-->
+          <?php if ( $db->num_rows >= '1'){ ?>
           <table class='table'>
             <thead>
               <tr>
                 <th>#</th>
                 <th>Domain Name</th>
                 <th>Extension</th>
-                <th>Creation Date</th>
+                <th>Expiration Date</th>
                 <th>Registered Company</th>
                 <th class='actions'>Actions</th>
               </tr>
             </thead>
             <tbody>
             <?php
+                
+
                 foreach ( $results as $db_rows ){
             ?>
               <tr class='success'>
                 <td><?php echo $db_rows->domain_id;?></td>
                 <td><?php echo $db_rows->domain_link.$db_rows->domain_ext;?></td>
                 <td><?php echo $db_rows->domain_ext;?></td>
-                <td><?php echo date('d/m/Y',$db_rows->domain_creation);?></td>
+                <td><?php echo date('d/m/Y',$db_rows->domain_expiration_date);?></td>
                 <td><?php echo $db_rows->domain_company;?></td>
                 <td class='action'>
                   <a class='btn btn-info' href='<?php echo $_link.'view.php?id='.$db_rows->domain_id;?>'>
                     <i class='icon-edit'></i>
                   </a>
-                  <a class='btn btn-danger' href='#'>
+                  <a class='btn btn-danger' href='<?php echo $_link.'delete.php?id='.$db_rows->domain_id;?>'>
                     <i class='icon-trash'></i>
                   </a>
                 </td>
               </tr>
               <?php } ?>
-              
-             
-             
-              
             </tbody>
           </table>
+          <?php }else{ echo "Content Found"; }?>
           <!--<div class='panel-footer'>
             <ul class='pagination pagination-sm'>
               <li>
