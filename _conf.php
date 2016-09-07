@@ -11,6 +11,9 @@
 			/* Veri Tabanı Bağlantısı */
 			require_once "inc/db.php";
 
+			/* Function */
+			require_once "function.php";
+
 			/* Genel Değişkenler */
 			$_title 	= 		"Domain Manager | ";
 			$_link 		=		"http://localhost/domain-manager/";

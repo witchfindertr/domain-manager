@@ -94,11 +94,10 @@
 				
 		}
 				
+				
 				$value	=	"Location:view.php?id=".$domain_id;
 				header($value);
-				die;
-				
-				
+				die;	
 						
 				
 			}

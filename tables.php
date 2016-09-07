@@ -1,7 +1,7 @@
 <?php
 
     require_once "_conf.php";
-    $results    = $db->get_results("SELECT * FROM domain_list Where domain_status = '1' ");
+    $results    = $db->get_results("SELECT * FROM domain_list Where domain_status = '1' ORDER BY domain_expiration_date ASC ");
                                                                                     
 
 ?>
@@ -99,6 +99,7 @@
                 <th>Extension</th>
                 <th>Expiration Date</th>
                 <th>Registered Company</th>
+                <th>Day</th>
                 <th class='actions'>Actions</th>
               </tr>
             </thead>
@@ -114,9 +115,13 @@
                 <td><?php echo $db_rows->domain_ext;?></td>
                 <td><?php echo date('d/m/Y',$db_rows->domain_expiration_date);?></td>
                 <td><?php echo $db_rows->domain_company;?></td>
+                <td><?php echo Days_Remaining($db_rows->domain_id);?></td>
                 <td class='action'>
                   <a class='btn btn-info' href='<?php echo $_link.'view.php?id='.$db_rows->domain_id;?>'>
                     <i class='icon-edit'></i>
+                  </a>
+                  <a class='btn btn-info' href='<?php echo $_link.'api.php?id='.$db_rows->domain_id;?>' target="_bank">
+                    <i class='icon-search'></i>
                   </a>
                   <a class='btn btn-danger' href='<?php echo $_link.'delete.php?id='.$db_rows->domain_id;?>'>
                     <i class='icon-trash'></i>
