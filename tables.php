@@ -96,7 +96,6 @@
               <tr>
                 <th>#</th>
                 <th>Domain Name</th>
-                <th>Extension</th>
                 <th>Expiration Date</th>
                 <th>Registered Company</th>
                 <th>Day</th>
@@ -104,15 +103,10 @@
               </tr>
             </thead>
             <tbody>
-            <?php
-                
-
-                foreach ( $results as $db_rows ){
-            ?>
+            <?php foreach ( $results as $db_rows ){ ?>
               <tr class='success'>
                 <td><?php echo $db_rows->domain_id;?></td>
-                <td><?php echo $db_rows->domain_link.$db_rows->domain_ext;?></td>
-                <td><?php echo $db_rows->domain_ext;?></td>
+                <td><?php echo $db_rows->domain_link;?></td>
                 <td><?php echo date('d/m/Y',$db_rows->domain_expiration_date);?></td>
                 <td><?php echo $db_rows->domain_company;?></td>
                 <td><?php echo Days_Remaining($db_rows->domain_id);?></td>
@@ -120,9 +114,13 @@
                   <a class='btn btn-info' href='<?php echo $_link.'view.php?id='.$db_rows->domain_id;?>'>
                     <i class='icon-edit'></i>
                   </a>
+                  
+                  <?php if ($db_rows->domain_ext != 'other') { ?>
                   <a class='btn btn-info' href='<?php echo $_link.'api.php?id='.$db_rows->domain_id;?>'  target="_bank">
                     <i class='icon-search'></i>
                   </a>
+                  <?php } ?>
+                  
                   <a class='btn btn-danger' href='<?php echo $_link.'delete.php?id='.$db_rows->domain_id;?>'>
                     <i class='icon-trash'></i>
                   </a>
