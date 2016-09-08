@@ -1,15 +1,7 @@
 <?php
 		require_once "_conf.php";
 
-		function Baglan($url){
-												$curl = curl_init();
-												curl_setopt($curl, CURLOPT_URL, $url);
-												curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-												curl_setopt($curl, CURLOPT_USERAGENT, $_SERVER["HTTP_USER_AGENT"]);
-												$cikti = curl_exec($curl);
-												curl_close($curl);
-												return str_replace(array("\n","\t","\r"), null, $cikti);
-		}
+		
 
 		if (isset ($_GET['id']) and !empty($_GET['id'])){
 
@@ -23,7 +15,7 @@
 		if ( $uzanti == '.com' or $uzanti == '.net' ){
 					
 				/* Name Server Bulmak İçin*/
-				$link		=	trim ( 'http://whois.hosting.info.tr/'.$row->domain_link.$row->domain_ext);
+				$link		=	trim ( 'http://whois.hosting.info.tr/'.$row->domain_link);
 				$baglan 	=	Baglan ($link);
 				$regex		=	"/Name Server: ([a-zA-ZÇŞĞÜÖİçşğüöı.0-9]+)/";
 				preg_match_all($regex, $baglan, $new);
@@ -54,26 +46,12 @@
 				/* Domain Başlangıç Süresini Bulmak İçin */
 				
 				/* Name Serverların IP Bulmak İçin */
-				$nsv1			= 	"http://www.ipsorgu.com/site_ip_adresi_sorgulama.php?site=".$domain_ns1."#sorgu";
-				$ns1baglanti	=	Baglan ($nsv1);
-				preg_match_all('#<span style="(.*?)">(.*?)</span>#', $ns1baglanti, $kontrol);
-				$domain_ip1		=	$kontrol[2][2];
-				
-				$nsv2			=	"http://www.ipsorgu.com/site_ip_adresi_sorgulama.php?site=".$domain_ns2."#sorgu";
-				$ns2baglanti	=	Baglan ($nsv2);
-				preg_match_all('#<span style="(.*?)">(.*?)</span>#', $ns2baglanti, $kontrol);
-				$domain_ip2		=	$kontrol[2][2];
-
+				$domain_ip1		=	Name_Server_IP($domain_ns1);
+				$domain_ip2		=	Name_Server_IP($domain_ns2);
 				
 				if ($domain_ns3 != ""){
-					
-					$nsv3				=	"http://www.ipsorgu.com/site_ip_adresi_sorgulama.php?site=".$domain_ns3."#sorgu";
-					$ns3baglanti		=	Baglan ($nsv3);
-					preg_match_all('#<span style="(.*?)">(.*?)</span>#', $ns3baglanti, $kontrol);
-					$domain_ip3			=	$kontrol[2][2];
-
+										$domain_ip3		=	Name_Server_IP($domain_ns3);
 				}else{
-					
 					$domain_ip3	= '';
 				}
 				/* Name Serverların IP Bulmak İçin */
@@ -100,7 +78,7 @@
 		if ( $uzanti == '.org' ){
 					
 				/* Name Server Bulmak İçin*/
-				$link		=	trim ( 'http://whois.hosting.info.tr/'.$row->domain_link.$row->domain_ext);
+				$link		=	trim ( 'http://whois.hosting.info.tr/'.$row->domain_link);
 				$baglan 	=	Baglan ($link);
 				$regex		=	"/Name Server: ([a-zA-ZÇŞĞÜÖİçşğüöı.0-9]+)/";
 				preg_match_all($regex, $baglan, $new);
@@ -130,26 +108,12 @@
 				/* Domain Başlangıç Süresini Bulmak İçin */
 				
 				/* Name Serverların IP Bulmak İçin */
-				$nsv1			= 	"http://www.ipsorgu.com/site_ip_adresi_sorgulama.php?site=".$domain_ns1."#sorgu";
-				$ns1baglanti	=	Baglan ($nsv1);
-				preg_match_all('#<span style="(.*?)">(.*?)</span>#', $ns1baglanti, $kontrol);
-				$domain_ip1		=	$kontrol[2][2];
-				
-				$nsv2			=	"http://www.ipsorgu.com/site_ip_adresi_sorgulama.php?site=".$domain_ns2."#sorgu";
-				$ns2baglanti	=	Baglan ($nsv2);
-				preg_match_all('#<span style="(.*?)">(.*?)</span>#', $ns2baglanti, $kontrol);
-				$domain_ip2		=	$kontrol[2][2];
-
+				$domain_ip1		=	Name_Server_IP($domain_ns1);
+				$domain_ip2		=	Name_Server_IP($domain_ns2);
 				
 				if ($domain_ns3 != ""){
-					
-					$nsv3				=	"http://www.ipsorgu.com/site_ip_adresi_sorgulama.php?site=".$domain_ns3."#sorgu";
-					$ns3baglanti		=	Baglan ($nsv3);
-					preg_match_all('#<span style="(.*?)">(.*?)</span>#', $ns3baglanti, $kontrol);
-					$domain_ip3			=	$kontrol[2][2];
-
+										$domain_ip3		=	Name_Server_IP($domain_ns3);
 				}else{
-					
 					$domain_ip3	= '';
 				}
 				/* Name Serverların IP Bulmak İçin */
@@ -176,7 +140,7 @@
 		if ( $uzanti == '.biz' ){
 					
 				/* Name Server Bulmak İçin*/
-				$link		=	trim ( 'http://whois.hosting.info.tr/'.$row->domain_link.$row->domain_ext);
+				$link		=	trim ( 'http://whois.hosting.info.tr/'.$row->domain_link);
 				$baglan 	=	Baglan ($link);
 				$regex		=	"/Name Server:(.*?)([a-zA-ZÇŞĞÜÖİçşğüöı.0-9]+)/";
 				preg_match_all($regex, $baglan, $new);
@@ -209,26 +173,12 @@
 				/* Domain Başlangıç Süresini Bulmak İçin */
 				
 				/* Name Serverların IP Bulmak İçin */
-				$nsv1			= 	"http://www.ipsorgu.com/site_ip_adresi_sorgulama.php?site=".$domain_ns1."#sorgu";
-				$ns1baglanti	=	Baglan ($nsv1);
-				preg_match_all('#<span style="(.*?)">(.*?)</span>#', $ns1baglanti, $kontrol);
-				$domain_ip1		=	$kontrol[2][2];
-				
-				$nsv2			=	"http://www.ipsorgu.com/site_ip_adresi_sorgulama.php?site=".$domain_ns2."#sorgu";
-				$ns2baglanti	=	Baglan ($nsv2);
-				preg_match_all('#<span style="(.*?)">(.*?)</span>#', $ns2baglanti, $kontrol);
-				$domain_ip2		=	$kontrol[2][2];
-
+				$domain_ip1		=	Name_Server_IP($domain_ns1);
+				$domain_ip2		=	Name_Server_IP($domain_ns2);
 				
 				if ($domain_ns3 != ""){
-					
-					$nsv3				=	"http://www.ipsorgu.com/site_ip_adresi_sorgulama.php?site=".$domain_ns3."#sorgu";
-					$ns3baglanti		=	Baglan ($nsv3);
-					preg_match_all('#<span style="(.*?)">(.*?)</span>#', $ns3baglanti, $kontrol);
-					$domain_ip3			=	$kontrol[2][2];
-
+										$domain_ip3		=	Name_Server_IP($domain_ns3);
 				}else{
-					
 					$domain_ip3	= '';
 				}
 				/* Name Serverların IP Bulmak İçin */
@@ -254,7 +204,7 @@
 		if ( $uzanti == '.info' ){
 					
 				/* Name Server Bulmak İçin*/
-				$link		=	trim ( 'http://whois.hosting.info.tr/'.$row->domain_link.$row->domain_ext);
+				$link		=	trim ( 'http://whois.hosting.info.tr/'.$row->domain_link);
 				$baglan 	=	Baglan ($link);
 				$regex		=	"/Name Server: ([a-zA-ZÇŞĞÜÖİçşğüöı.0-9]+)/";
 				preg_match_all($regex, $baglan, $new);
@@ -285,26 +235,12 @@
 				/* Domain Başlangıç Süresini Bulmak İçin */
 				
 				/* Name Serverların IP Bulmak İçin */
-				$nsv1			= 	"http://www.ipsorgu.com/site_ip_adresi_sorgulama.php?site=".$domain_ns1."#sorgu";
-				$ns1baglanti	=	Baglan ($nsv1);
-				preg_match_all('#<span style="(.*?)">(.*?)</span>#', $ns1baglanti, $kontrol);
-				$domain_ip1		=	$kontrol[2][2];
-				
-				$nsv2			=	"http://www.ipsorgu.com/site_ip_adresi_sorgulama.php?site=".$domain_ns2."#sorgu";
-				$ns2baglanti	=	Baglan ($nsv2);
-				preg_match_all('#<span style="(.*?)">(.*?)</span>#', $ns2baglanti, $kontrol);
-				$domain_ip2		=	$kontrol[2][2];
-
+				$domain_ip1		=	Name_Server_IP($domain_ns1);
+				$domain_ip2		=	Name_Server_IP($domain_ns2);
 				
 				if ($domain_ns3 != ""){
-					
-					$nsv3				=	"http://www.ipsorgu.com/site_ip_adresi_sorgulama.php?site=".$domain_ns3."#sorgu";
-					$ns3baglanti		=	Baglan ($nsv3);
-					preg_match_all('#<span style="(.*?)">(.*?)</span>#', $ns3baglanti, $kontrol);
-					$domain_ip3			=	$kontrol[2][2];
-
+										$domain_ip3		=	Name_Server_IP($domain_ns3);
 				}else{
-					
 					$domain_ip3	= '';
 				}
 				/* Name Serverların IP Bulmak İçin */
