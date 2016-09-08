@@ -1,5 +1,6 @@
 <?php
-		require_once "_conf.php";
+		
+    require_once "_conf.php";
     if ( isset($_GET['id']) and !empty($_GET['id']) ){ 
         
         $domain_id  =   strip_tags($_GET['id']);

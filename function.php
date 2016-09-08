@@ -1,5 +1,4 @@
 <?php
-
 		/* Veri Tabanı Bağlantısı */
 		require_once "inc/db.php";
 		

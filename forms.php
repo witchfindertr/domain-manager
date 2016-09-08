@@ -1,5 +1,6 @@
 <?php
-		require_once "_conf.php";
+		
+    require_once "_conf.php";
 
 		if (isset($_POST['domain_link'])){
 						

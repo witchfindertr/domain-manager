@@ -1,4 +1,5 @@
-<?php require_once "_conf.php"; ?><!DOCTYPE html>
+<?php require_once "_conf.php"; ?>
+<!DOCTYPE html>
 <html class='no-js' lang='en'>
   <head>
     <meta charset='utf-8'>
