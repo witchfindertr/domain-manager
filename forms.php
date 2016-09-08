@@ -135,6 +135,9 @@
                     <option value = '.org'>.org</option>
                     <option value = '.info'>.info</option>
                     <option value = '.biz'>.biz</option>
+                    <option value = '.com.tr'>.com.tr</option>
+                    <option value = '.net.tr'>.net.tr</option>
+                    <option value = '.org.tr'>.org.tr</option>
                     <option value = 'other'>other (No Api)</option>
                   </select>
                 </div>
