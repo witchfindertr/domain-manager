@@ -130,9 +130,11 @@
                 <div class='form-group'>
                   <label class='control-label'>Domain Extension</label>
                   <select class='form-control' name='domain_ext'>
-                    <option value = '.com'>.com (commercial)</option>
-                    <option value = '.net'>.net (network)</option>
-                    <option value = '.org'>.org (organization)</option>
+                    <option value = '.com'>.com</option>
+                    <option value = '.net'>.net</option>
+                    <option value = '.org'>.org</option>
+                    <option value = '.info'>.info</option>
+                    <option value = '.biz'>.biz</option>
                   </select>
                 </div>
                 <div class='form-group'>
