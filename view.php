@@ -4,10 +4,13 @@
         
         $domain_id  =   strip_tags($_GET['id']);
         $row        =   $db->get_row("SELECT * FROM domain_list Where domain_status = '1' and domain_id = '$domain_id' LIMIT 1");
+        
         if ( $db->num_rows != '1'){
                                     header("Location:tables.php?alert=5");
                                     die;
         }
+        
+
     }else{
 
       header("Location:tables.php?alert=4");
@@ -90,47 +93,49 @@
             Domain View 
           </div>
           <div class='panel-body'>
-            
-              <fieldset>
-                <div class='form-actions' style="float:right;">
+            <div class='form-actions' style="float:right;">
                   <a href="<?php echo $_link.'delete.php?id='.$row->domain_id;?>"><button class='btn btn-default' type='button'>Domain Delete</button></a>
                 </div>
-                <div class='form-actions'>
-                  <a href="<?php echo $_link.'api.php?id='.$row->domain_id;?>"><button class='btn btn-default' type='button'>Get Update Information</button></a> - <?php echo date('d/m/Y H:i:s',$row->domain_update_date);?>
-                </div>
+            <form method="POST" action="update.php">
+              <fieldset>
                 
+                <?php if ($row->domain_ext != 'other'){ ?>
+                <div class='form-actions'>
+                  <a href="<?php echo $_link.'api.php?id='.$row->domain_id;?>"><button class='btn btn-default' type='button'>Get Update Information</button></a> - <?php echo date('d.m.Y H:i:s',$row->domain_update_date);?>
+                </div>
+                <?php } ?>
                 <div style="margin-top:15px;">
                 </div>
                 <div class='form-group'>
                   <label class='control-label' style="color:Red;">Expiration Date</label>
-                  <input class='form-control' placeholder='' type='text' name='domain_update_time' value="<?php echo date('d/m/Y',$row->domain_expiration_date);?>">
+                  <input class='form-control' placeholder='' type='text' name='domain_expiration_date' value="<?php echo date('d.m.Y',$row->domain_expiration_date);?>">
                 </div>
                 <div class='form-group'>
                   <label class='control-label'>Creation Date</label>
-                  <input class='form-control' placeholder='' type='text' name='domain_creation' value="<?php echo date('d/m/Y',$row->domain_creation_date);?>">
+                  <input class='form-control' placeholder='' type='text' name='domain_creation_date' value="<?php echo date('d.m.Y',$row->domain_creation_date);?>">
                 </div>
                 <div class='form-group'>
-                  <label class='control-label'>Domain Name (e.g google)</label>
-                  <input class='form-control' placeholder='google' type='text' name='domain_link' value="<?php echo $row->domain_link.$row->domain_ext;?>">
+                  <label class='control-label'>Domain Name (e.g google.com)</label>
+                  <input class='form-control' placeholder='google' type='text' name='domain_link' value="<?php echo $row->domain_link;?>">
                 </div>
                 <div class='form-group'>
                   <label class='control-label'>Registered Company</label>
                   <input class='form-control' placeholder='' type='text' name='domain_company' value="<?php echo $row->domain_company;?>">
                 </div>
                 
-                <?php if (isset ($row->domain_ns1) and !empty($row->domain_ns1) ){ ?>
+                <?php if (isset ($row->domain_ns1) and !empty($row->domain_ns1) or ($row->domain_ext == 'other') ){ ?>
                 <div class='form-group'>
                   <label class='control-label'>Domain Name Server 1</label>
                   <input class='form-control' placeholder='' type='text' name='domain_ns1' value="<?php echo $row->domain_ns1;?>">
                 </div>
                 <?php } ?>
-                <?php if (isset ($row->domain_ns2) and !empty($row->domain_ns2) ){ ?>
+                <?php if (isset ($row->domain_ns2) and !empty($row->domain_ns2) or ($row->domain_ext == 'other') ){ ?>
                 <div class='form-group'>
                   <label class='control-label'>Domain Name Server 2</label>
                   <input class='form-control' placeholder='' type='text' name='domain_ns2' value="<?php echo $row->domain_ns2;?>">
                 </div>
                 <?php } ?>
-                <?php if (isset ($row->domain_ns3) and !empty($row->domain_ns3) ){ ?>
+                <?php if (isset ($row->domain_ns3) and !empty($row->domain_ns3) or ($row->domain_ext == 'other') ){ ?>
                 <div class='form-group'>
                   <label class='control-label'>Domain Name Server 3</label>
                   <input class='form-control' placeholder='' type='text' name='domain_ns3' value="<?php echo $row->domain_ns3;?>">
@@ -154,7 +159,15 @@
                   <input class='form-control' placeholder='' type='text' name='domain_ip3' value="<?php echo $row->domain_ip3;?>">
                 </div>
                 <?php } ?>
-                
+                <?php if ($row->domain_ext == 'other'){ ?>
+                <div class='form-actions'>
+                  <button class='btn btn-default' type='submit'>Manuel Update</button>
+                </div>
+                <?php } ?>
+                <div class='form-group'>
+                  <input class='form-control' placeholder='' type='hidden' name='domain_id' value="<?php echo $row->domain_id;?>">
+                </div>
+               </form> 
                 </div>
               </fieldset>
           </div>
