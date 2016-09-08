@@ -124,8 +124,8 @@
             <form method="POST">
               <fieldset>
                 <div class='form-group'>
-                  <label class='control-label'>Domain Name (e.g google)</label>
-                  <input class='form-control' placeholder='google' type='text' name='domain_link'>
+                  <label class='control-label'>Domain Name (e.g google.com)</label>
+                  <input class='form-control' placeholder='google.com' type='text' name='domain_link'>
                 </div>
                 <div class='form-group'>
                   <label class='control-label'>Domain Extension</label>
@@ -135,6 +135,7 @@
                     <option value = '.org'>.org</option>
                     <option value = '.info'>.info</option>
                     <option value = '.biz'>.biz</option>
+                    <option value = 'other'>other (No Api)</option>
                   </select>
                 </div>
                 <div class='form-group'>
