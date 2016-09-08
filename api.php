@@ -325,9 +325,7 @@
 																		 WHERE domain_id = '$domain_id' ");
 				
 		}
-		
-				
-				
+	
 				$value	=	"Location:view.php?id=".$domain_id;
 				header($value);
 				die;	
