@@ -261,6 +261,67 @@
 																		 WHERE domain_id = '$domain_id' ");
 				
 		}
+
+		if ( $uzanti == '.com.tr' or $uzanti == '.net.tr' or $uzanti == '.org.tr' ){
+					
+				/* Name Server Bulmak İçin*/
+				$link		=	trim ( 'http://whois.hosting.info.tr/'.$row->domain_link);
+				$baglan 	=	Baglan ($link);
+				$regex 		=	"/([>])([A-Za-z0-9-]+[\.][A-Za-z0-9-]+[\.][A-Za-z0-9-\.]+)/";
+				
+				preg_match_all($regex, $baglan, $new);
+				
+				$domain_ns1 = strip_tags($new[2][1]);
+				$domain_ns2 = strip_tags($new[2][2]);
+				
+				if (isset ($new[2][3])){ $domain_ns3 = strip_tags($new[2][3]); }else{ $domain_ns3 = ""; }
+				/* Name Server Bulmak İçin*/
+				
+				/* Domain Bitiş Süresini Bulmak İçin */
+				$regex		= "/(Expires on..............:) ([0-9]{4})-([a-zA-Z]{3})-([0-9]{2})/";
+				preg_match_all($regex, $baglan, $value);
+
+				$Expiration_Date			=	$value[4][0].'.'.$value[3][0].'.'.$value[2][0];
+				$domain_expiration_date		=	strtotime($Expiration_Date);
+				/* Domain Bitiş Süresini Bulmak İçin */
+				
+				/* Domain Başlangıç Süresini Bulmak İçin */
+				$regex		= "/(Created on..............:) ([0-9]{4})-([a-zA-Z]{3})-([0-9]{2})/";
+				preg_match_all($regex, $baglan, $value);
+
+				$Creation_Date				=	$value[5][0].'.'.$value[4][0].'.'.$value[3][0];
+				$domain_creation_date		=	strtotime($Creation_Date);
+				
+				
+				/* Domain Başlangıç Süresini Bulmak İçin */
+				
+				/* Name Serverların IP Bulmak İçin */
+				$domain_ip1		=	Name_Server_IP($domain_ns1);
+				$domain_ip2		=	Name_Server_IP($domain_ns2);
+				
+				if ($domain_ns3 != ""){
+										$domain_ip3		=	Name_Server_IP($domain_ns3);
+				}else{
+					$domain_ip3	= '';
+				}
+				/* Name Serverların IP Bulmak İçin */
+				
+				$domain_update_date		=	time();
+				$result					=	$db->query("UPDATE domain_list SET
+
+																			domain_ns1				=		'$domain_ns1',
+																			domain_ns2				=		'$domain_ns2',
+																			domain_ns3				=		'$domain_ns3',
+																			domain_ip1				=		'$domain_ip1',
+																			domain_ip2				=		'$domain_ip2',
+																			domain_ip3				=		'$domain_ip3',
+																			domain_update_date 		= 		'$domain_update_date',
+																			domain_expiration_date	=		'$domain_expiration_date',
+																			domain_creation_date	=		'$domain_creation_date'
+
+																		 WHERE domain_id = '$domain_id' ");
+				
+		}
 	
 				$value	=	"Location:view.php?id=".$domain_id;
 				header($value);
